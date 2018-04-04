@@ -166,7 +166,7 @@ class Query
      * Query constructor.
      * @param $connection
      */
-    function __construct($connection = NULL)
+    function __construct($connection = null)
     {
         $this->connection = $connection;
     }
@@ -423,7 +423,7 @@ class Query
      * @param null $value
      * @return $this
      */
-    public function where($name, $operator = "=", $value = NULL)
+    public function where($name, $operator = "=", $value = null)
     {
 
         if (is_callback_function($name)) {
@@ -479,7 +479,7 @@ class Query
      * @param null $value
      * @return $this
      */
-    public function whereNot($name, $operator = "=", $value = NULL)
+    public function whereNot($name, $operator = "=", $value = null)
     {
 
         if (is_callback_function($name)) {
@@ -658,7 +658,7 @@ class Query
      * @param null $q
      * @return $this
      */
-    public function search($q = NULL, $settings = NULL)
+    public function search($q = null, $settings = null)
     {
 
         if ($q) {
@@ -745,10 +745,6 @@ class Query
             $query["type"] = $this->getType();
         }
 
-        if($this->model){
-            $this->model->boot($this);
-        }
-
         $query["body"] = $this->getBody();
 
         $query["from"] = $this->getSkip();
@@ -779,7 +775,7 @@ class Query
      * @param  string $scroll_id
      * @return array|Collection
      */
-    public function clear($scroll_id = NULL)
+    public function clear($scroll_id = null)
     {
 
         $scroll_id = !is_null($scroll_id) ? $scroll_id : $this->scroll_id;
@@ -795,10 +791,10 @@ class Query
      * @param string $scroll_id
      * @return array|Collection
      */
-    public function get($scroll_id = NULL)
+    public function get($scroll_id = null)
     {
 
-        $scroll_id = NULL;
+        $scroll_id = null;
 
         $result = $this->getResult($scroll_id);
 
@@ -810,7 +806,7 @@ class Query
      * @param string $scroll_id
      * @return object
      */
-    public function first($scroll_id = NULL)
+    public function first($scroll_id = null)
     {
 
         $this->take(1);
@@ -848,7 +844,7 @@ class Query
      * @param null $scroll_id
      * @return mixed
      */
-    public function response($scroll_id = NULL)
+    public function response($scroll_id = null)
     {
 
         $scroll_id = !is_null($scroll_id) ? $scroll_id : $this->scroll_id;
@@ -882,12 +878,10 @@ class Query
 
         // Remove unsupported count query keys
 
-        unset(
-            $query["size"],
+        unset($query["size"],
             $query["from"],
             $query["body"]["_source"],
-            $query["body"]["sort"]
-        );
+            $query["body"]["sort"]);
 
         return $this->connection->count($query)["count"];
     }
@@ -924,12 +918,15 @@ class Query
             $model->setIndex($row["_index"]);
             $model->setType($row["_type"]);
 
-            // match earlier version
+            //highlight extension support in model
+            $model->setHighlight($row["highlight"] ?? null);
 
+            // match earlier version
             $model->_index = $row["_index"];
             $model->_type = $row["_type"];
             $model->_id = $row["_id"];
             $model->_score = $row["_score"];
+
 
             $new[] = $model;
         }
@@ -940,7 +937,7 @@ class Query
         $new->max_score = $result["hits"]["max_score"];
         $new->took = $result["took"];
         $new->timed_out = $result["timed_out"];
-        $new->scroll_id = isset($result["_scroll_id"]) ? $result["_scroll_id"] : NULL;
+        $new->scroll_id = isset($result["_scroll_id"]) ? $result["_scroll_id"] : null;
         $new->shards = (object)$result["_shards"];
 
         return $new;
@@ -967,6 +964,9 @@ class Query
                 $model->setType($data[0]["_type"]);
             }
 
+            //fix for highlight support in model
+            $model->setHighlight($data[0]["highlight"] ?? null);
+
             // match earlier version
 
             $model->_index = $data[0]["_index"];
@@ -977,7 +977,7 @@ class Query
             $new = $model;
 
         } else {
-            $new = NULL;
+            $new = null;
         }
 
         return $new;
@@ -995,7 +995,7 @@ class Query
 
         $this->take($per_page);
 
-        $page = $page ?: Request::get($page_name, 1);
+        $page = $page ? : Request::get($page_name, 1);
 
         $this->skip(($page * $per_page) - $per_page);
 
@@ -1010,7 +1010,7 @@ class Query
      * @param null $_id
      * @return object
      */
-    public function insert($data, $_id = NULL)
+    public function insert($data, $_id = null)
     {
 
         if ($_id) {
@@ -1084,7 +1084,7 @@ class Query
      * @param null $_id
      * @return object
      */
-    public function update($data, $_id = NULL)
+    public function update($data, $_id = null)
     {
 
         if ($_id) {
@@ -1173,7 +1173,7 @@ class Query
      * @param null $_id
      * @return object
      */
-    public function delete($_id = NULL)
+    public function delete($_id = null)
     {
 
         if ($_id) {
@@ -1321,7 +1321,7 @@ class Query
      */
     public function getCacheKey()
     {
-        return $this->cachePrefix . ':' . ($this->cacheKey ?: $this->generateCacheKey());
+        return $this->cachePrefix . ':' . ($this->cacheKey ? : $this->generateCacheKey());
     }
 
 

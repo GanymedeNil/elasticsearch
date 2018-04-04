@@ -30,6 +30,9 @@ class Model
      */
     protected $type;
 
+    protected $highlight;
+
+
     /**
      * Attribute data type
      * @available boolean, bool, integer, int, float, double, string, array, object, null
@@ -145,6 +148,15 @@ class Model
     }
 
     /**
+     * Set highlight
+     * @return void
+     */
+    public function setHighlight($highlight)
+    {
+        $this->highlight = $highlight;
+    }
+
+    /**
      * Magic getter for model properties
      * @param $name
      * @return null
@@ -169,7 +181,23 @@ class Model
 
         }
 
-        return NULL;
+        return null;
+    }
+
+    public function hasHighlightAttribute($name)
+    {
+        return $this->highlight && array_key_exists($name, $this->highlight);
+    }
+
+    public function getHighlightAttribute($name, $position = null)
+    {
+        if ($this->hasHighlightAttribute($name)) {
+            if (!is_null($position)) {
+                return $this->highlight[$name][$position];
+            }
+            return $this->highlight[$name];
+        }
+        return null;
     }
 
     /**
@@ -192,7 +220,7 @@ class Model
     protected function getAppendsAttribute($name)
     {
         $method = "get" . ucfirst(camel_case($name)) . "Attribute";
-        $value = method_exists($this, $method) ? $this->$method(NULL) : NULL;
+        $value = method_exists($this, $method) ? $this->$method(null) : null;
         return $this->setAttributeType($name, $value);
     }
 
@@ -345,7 +373,7 @@ class Model
     public function save()
     {
 
-        $fields = array_except($this->attributes, ["_index", "_type", "_id", "_score"]);
+        $fields = array_except($this->attributes, ["_index", "_type", "_id", "_score", "highlight"]);
 
         if ($this->exists()) {
 
@@ -418,6 +446,4 @@ class Model
     {
         return $this->newQuery()->$method(...$parameters);
     }
-
-    public function boot($query){}
 }
