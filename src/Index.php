@@ -1,10 +1,10 @@
 <?php
 
-namespace Basemkhirat\Elasticsearch;
+namespace GanymedeNil\Elasticsearch;
 
 /**
  * Class Index
- * @package Basemkhirat\Elasticsearch\Query
+ * @package GanymedeNil\Elasticsearch\Query
  */
 class Index
 {

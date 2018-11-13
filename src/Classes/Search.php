@@ -1,12 +1,12 @@
 <?php
 
-namespace Basemkhirat\Elasticsearch\Classes;
+namespace GanymedeNil\Elasticsearch\Classes;
 
-use Basemkhirat\Elasticsearch\Query;
+use GanymedeNil\Elasticsearch\Query;
 
 /**
  * Class Search
- * @package Basemkhirat\Elasticsearch\Classes
+ * @package GanymedeNil\Elasticsearch\Classes
  */
 class Search
 {

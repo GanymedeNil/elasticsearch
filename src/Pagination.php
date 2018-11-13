@@ -1,6 +1,6 @@
 <?php
 
-namespace Basemkhirat\Elasticsearch;
+namespace GanymedeNil\Elasticsearch;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\UrlWindow;

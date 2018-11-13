@@ -1,15 +1,15 @@
 <?php
 
-namespace Basemkhirat\Elasticsearch;
+namespace GanymedeNil\Elasticsearch;
 
-use Basemkhirat\Elasticsearch\Classes\Bulk;
-use Basemkhirat\Elasticsearch\Classes\Search;
-use Basemkhirat\Elasticsearch\Collection;
+use GanymedeNil\Elasticsearch\Classes\Bulk;
+use GanymedeNil\Elasticsearch\Classes\Search;
+use GanymedeNil\Elasticsearch\Collection;
 
 
 /**
  * Class Query
- * @package Basemkhirat\Elasticsearch\Query
+ * @package GanymedeNil\Elasticsearch\Query
  */
 class Query
 {
@@ -157,7 +157,7 @@ class Query
 
     /**
      * Elastic model instance
-     * @var \Basemkhirat\Elasticsearch\Model
+     * @var \GanymedeNil\Elasticsearch\Model
      */
     public $model;
 

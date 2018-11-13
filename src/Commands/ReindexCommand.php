@@ -1,12 +1,12 @@
 <?php
 
-namespace Basemkhirat\Elasticsearch\Commands;
+namespace GanymedeNil\Elasticsearch\Commands;
 
 use Illuminate\Console\Command;
 
 /**
  * Class ReindexCommand
- * @package Basemkhirat\Elasticsearch\Commands
+ * @package GanymedeNil\Elasticsearch\Commands
  */
 class ReindexCommand extends Command
 {
