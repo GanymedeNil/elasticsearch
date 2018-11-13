@@ -1,5 +1,5 @@
 {
-    "name": "basemkhirat/elasticsearch",
+    "name": "GanymedeNil/elasticsearch",
     "description": "Laravel, Lumen and Native php elasticseach query builder to build complex queries using an elegant syntax",
     "keywords": [
         "elasticsearch",
@@ -50,10 +50,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Basemkhirat\\Elasticsearch\\ElasticsearchServiceProvider"
+                "GanymedeNil\\Elasticsearch\\ElasticsearchServiceProvider"
             ],
             "aliases": {
-                "ES": "Basemkhirat\\Elasticsearch\\Facades\\ES"
+                "ES": "GanymedeNil\\Elasticsearch\\Facades\\ES"
             }
         }
     }
