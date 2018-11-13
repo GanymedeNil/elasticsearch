@@ -1,5 +1,5 @@
 {
-    "name": "GanymedeNil/elasticsearch",
+    "name": "ganymedenil/elasticsearch",
     "description": "Laravel, Lumen and Native php elasticseach query builder to build complex queries using an elegant syntax",
     "keywords": [
         "elasticsearch",
