@@ -4,6 +4,7 @@ namespace GanymedeNil\Elasticsearch;
 
 use GanymedeNil\Elasticsearch\Classes\Bulk;
 use GanymedeNil\Elasticsearch\Classes\Search;
+use Illuminate\Pagination\Paginator;
 use GanymedeNil\Elasticsearch\Collection;
 
 
@@ -917,7 +918,6 @@ class Query
             $model->setConnection($model->getConnection());
             $model->setIndex($row["_index"]);
             $model->setType($row["_type"]);
-
             //highlight extension support in model
             $model->setHighlight($row["highlight"] ?? null);
 
@@ -1001,7 +1001,7 @@ class Query
 
         $objects = $this->get();
 
-        return new Pagination($objects, $objects->total, $per_page, $page, ['path' => Request::url(), 'query' => Request::query()]);
+        return new Pagination($objects, $objects->total, $per_page, $page, ['path' => Paginator::resolveCurrentPath(), 'query' => Request::query()]);
     }
 
     /**
